@@ -1,0 +1,9 @@
+<nav class="navbar navbar-light bg-light">
+  <a class="navbar-brand" href="#">
+    <img src="https://smartop.io/smartop-logo.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+    Liste des interventions de la base de données Mongo
+  </a>
+</nav>
+<div *ngFor="let intervention of interventions">
+  <p>Nom du chirurgien: {{ intervention.surgeon }}</p>
+</div>
