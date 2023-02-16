@@ -1,9 +1,63 @@
 <nav class="navbar navbar-light bg-light">
-  <a class="navbar-brand" href="#">
-    <img src="https://smartop.io/smartop-logo.svg" width="30" height="30" class="d-inline-block align-top" alt="">
-    Liste des interventions de la base de données Mongo
+  <a class="navbar-brand mx-auto" >
+    <img src="https://image.noelshack.com/fichiers/2023/07/4/1676507842-smartopchirurgiens.jpg"
+         width="100" height="100" class="d-inline-block align-top" alt=""
+         style="margin-left: 180px">
+    <h3>Tableau de classement des chirurgiens</h3>
   </a>
 </nav>
-<div *ngFor="let intervention of interventions">
-  <p>Nom du chirurgien: {{ intervention.surgeon }}</p>
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col" style="border-style: solid; border-color: cornflowerblue;border-radius: 20px">
+      <input class="form-control mr-sm-2" type="text" [(ngModel)]="searchTerm" (ngModelChange)="search()" placeholder="Rechercher un nom de chirurgien" aria-label="Search">
+    </div>
+  </div>
 </div>
+<br>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-8">
+      <table class="table">
+        <thead style="background-color: cornflowerblue;color: white">
+        <tr>
+          <th scope="col">Nom Chirurgien</th>
+          <th scope="col">Spécialité</th>
+          <th scope="col">Nbr intervention</th>
+          <th scope="col">Anesthésiste favori</th>
+          <th scope="col">Infirmière favorite</th>
+          <th scope="col">Salle la plus fréquentée</th>
+          <th scope="col">InFav</th>
+        </tr>
+        </thead>
+        <tbody style="background-color: lightgrey" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="500" (scrolled)="onScroll()">
+        <tr *ngFor="let intervention of interventions | paginate: { itemsPerPage: pageSize, currentPage: currentPage }" >
+          <td>{{intervention.surgeon}}</td>
+          <td>{{intervention.specialty}}</td>
+          <td>{{intervention.total}}</td>
+          <td>{{intervention.favorite_anesthetist}}</td>
+          <td>{{intervention.favorite_nurse1}}</td>
+          <td>{{intervention.favorite_room}}</td>
+          <td>test</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-4">
+      <table class="table">
+        <thead style="background-color: cornflowerblue;color: white">
+        <tr>
+          <th scope="col">Intervention la plus fréquente du chirurgien </th>
+        </tr>
+        </thead>
+        <tbody style="background-color: lightgrey" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="500" (scrolled)="onScroll()">
+        <tr *ngFor="let intervention of interventionFavori | paginate: { itemsPerPage: pageSize, currentPage: currentPage }">
+          <td>{{intervention.favorite_intervention}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<pagination-controls (pageChange)="currentPage = $event"></pagination-controls>

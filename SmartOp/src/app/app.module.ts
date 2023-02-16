@@ -8,6 +8,8 @@ import { HttpClientModule } from '@angular/common/http';
 import {FormsModule} from "@angular/forms";
 import {RouterModule} from "@angular/router";
 import {BrowserAnimationsModule, NoopAnimationsModule} from "@angular/platform-browser/animations";
+import { NgxPaginationModule } from 'ngx-pagination';
+import {InfiniteScrollModule} from "ngx-infinite-scroll";
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import {BrowserAnimationsModule, NoopAnimationsModule} from "@angular/platform-b
     BrowserAnimationsModule,
     NoopAnimationsModule,
     RouterModule,
+    InfiniteScrollModule,
+    NgxPaginationModule,
     FormsModule
   ],
   providers: [],
